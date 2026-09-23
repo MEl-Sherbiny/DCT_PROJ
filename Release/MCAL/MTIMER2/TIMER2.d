@@ -1,0 +1,17 @@
+MCAL/MTIMER2/TIMER2.o MCAL/MTIMER2/TIMER2.o: ../MCAL/MTIMER2/TIMER2.c \
+  ../MCAL/MTIMER2/../../LIB/STD_type.h \
+  ../MCAL/MTIMER2/../../LIB/BitMath.h ../MCAL/MTIMER2/../MDIO/DIO.h \
+  ../MCAL/MTIMER2/../MDIO/../../LIB/STD_type.h \
+  ../MCAL/MTIMER2/../MDIO/../../LIB/BitMath.h ../MCAL/MTIMER2/TIMER2.h
+
+../MCAL/MTIMER2/../../LIB/STD_type.h:
+
+../MCAL/MTIMER2/../../LIB/BitMath.h:
+
+../MCAL/MTIMER2/../MDIO/DIO.h:
+
+../MCAL/MTIMER2/../MDIO/../../LIB/STD_type.h:
+
+../MCAL/MTIMER2/../MDIO/../../LIB/BitMath.h:
+
+../MCAL/MTIMER2/TIMER2.h:
