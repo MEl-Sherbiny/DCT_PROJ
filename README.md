@@ -14,4 +14,8 @@ https://github.com/user-attachments/assets/fe77bb6e-3acb-4b51-af7a-63d3da235afe
 =================================================================================
 =================================================================================
 MEMORY WRITING VALUES AND TERMINAL 
-https://github.com/user-attachments/assets/e09a5339-fba6-4fc8-862a-94cde9305bad
+
+
+https://github.com/user-attachments/assets/81833cf0-de04-4470-a438-4bd1a0988b7c
+
+
