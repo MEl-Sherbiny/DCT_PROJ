@@ -1,4 +1,5 @@
 #include "HERROR.h"
+#include <util/delay.h>
 
 u8 G_u8TempErrorLogged = 0;
 u8 G_u8LowCurrErrorLogged = 0;
@@ -61,17 +62,12 @@ void HERROR_u32PrintErrors(void){
     u8 L_u8LowCurrent = EEPROM_u8Read(EEPROM_ADDR_CURRENT_LOW);
     u8 L_u8HighTemp = EEPROM_u8Read(EEPROM_ADDR_TEMP_ERROR);
     if(L_u8HighCurrent == ERROR_CODE_HIGH_CURRENT)
-
-        MUART_voidTxStr("Error code 0x51: High Current\r\n");
+        MUART_voidTxStr("\r\nError code 0x51: High Current\r\n");
+    _delay_ms(250);
     if(L_u8LowCurrent == ERROR_CODE_LOW_CURRENT)
-        MUART_voidTxStr("Error code 0x52: Low Current\r\n");
+        MUART_voidTxStr("\r\nError code 0x52: Low Current\r\n");
+    _delay_ms(250);
     if(L_u8HighTemp == ERROR_CODE_HIGH_TEMP)
-        MUART_voidTxStr("Error code 0x50: High Temperature\r\n");
+        MUART_voidTxStr("\r\nError code 0x50: High Temperature\r\n");
+    _delay_ms(250);
 }
-        while(!MUART_voidTxStr("Error code 0x51: High Current\r\n"));
-    if(L_u8LowCurrent == ERROR_CODE_LOW_CURRENT)
-        while(!MUART_voidTxStr("Error code 0x52: Low Current\r\n"));
-    if(L_u8HighTemp == ERROR_CODE_HIGH_TEMP)
-        while(!MUART_voidTxStr("Error code 0x50: High Temperature\r\n"));
-}
-
