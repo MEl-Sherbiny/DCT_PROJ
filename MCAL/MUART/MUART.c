@@ -59,7 +59,7 @@ void MUART_voidTxStr(u8* a_u8String){
 
 u8 MUART_u8Rx(void){
     // while(!READ_BIT(UCSRA, 7));
-    if(READ_BIT(UCSRC, 7))
+    if(READ_BIT(UCSRA, 7))
         return UDR;
     else
         return INCOMPLETE_RECIEVE;

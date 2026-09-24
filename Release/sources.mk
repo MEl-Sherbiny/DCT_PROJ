@@ -22,6 +22,7 @@ C_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 APP \
+HAL/HERROR \
 HAL/HLED \
 HAL/HLM35 \
 HAL/MPOT \
@@ -31,4 +32,5 @@ MCAL/MDIO \
 MCAL/MEXTI \
 MCAL/MTIMER0 \
 MCAL/MTIMER2 \
+MCAL/MUART \
 

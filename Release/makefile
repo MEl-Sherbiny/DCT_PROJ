@@ -8,6 +8,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include MCAL/MUART/subdir.mk
 -include MCAL/MTIMER2/subdir.mk
 -include MCAL/MTIMER0/subdir.mk
 -include MCAL/MEXTI/subdir.mk
@@ -17,6 +18,7 @@ RM := rm -rf
 -include HAL/MPOT/subdir.mk
 -include HAL/HLM35/subdir.mk
 -include HAL/HLED/subdir.mk
+-include HAL/HERROR/subdir.mk
 -include APP/subdir.mk
 -include subdir.mk
 -include objects.mk
