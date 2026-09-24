@@ -14,6 +14,7 @@ RM := rm -rf
 -include MCAL/MDIO/subdir.mk
 -include MCAL/MADC/subdir.mk
 -include MCAL/EEPROM/subdir.mk
+-include HAL/MPOT/subdir.mk
 -include HAL/HLM35/subdir.mk
 -include HAL/HLED/subdir.mk
 -include APP/subdir.mk

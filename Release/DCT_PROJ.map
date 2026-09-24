@@ -85,6 +85,7 @@ LOAD ./MCAL/MEXTI/EXTI.o
 LOAD ./MCAL/MDIO/DIO.o
 LOAD ./MCAL/MADC/ADC.o
 LOAD ./MCAL/EEPROM/EEPROM.o
+LOAD ./HAL/MPOT/POT.o
 LOAD ./HAL/HLM35/LM35.o
 LOAD ./HAL/HLED/LED.o
 LOAD ./APP/main.o
@@ -182,7 +183,7 @@ LOAD d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1cb6
+.text           0x00000000     0x1d1e
  *(.vectors)
  .vectors       0x00000000       0x54 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
                 0x00000000                __vectors
@@ -259,6 +260,7 @@ LOAD d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/
  .text          0x00000092        0x0 ./MCAL/MDIO/DIO.o
  .text          0x00000092        0x0 ./MCAL/MADC/ADC.o
  .text          0x00000092        0x0 ./MCAL/EEPROM/EEPROM.o
+ .text          0x00000092        0x0 ./HAL/MPOT/POT.o
  .text          0x00000092        0x0 ./HAL/HLM35/LM35.o
  .text          0x00000092        0x0 ./HAL/HLED/LED.o
  .text          0x00000092        0x0 ./APP/main.o
@@ -400,42 +402,48 @@ LOAD d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/
  .text.EEPROM_voidRead
                 0x00001b14        0xa ./MCAL/EEPROM/EEPROM.o
                 0x00001b14                EEPROM_voidRead
+ .text.POT_voidInit
+                0x00001b1e        0x2 ./HAL/MPOT/POT.o
+                0x00001b1e                POT_voidInit
+ .text.POT_u16GetCurrent
+                0x00001b20        0xc ./HAL/MPOT/POT.o
+                0x00001b20                POT_u16GetCurrent
  .text.LM35_voidInit
-                0x00001b1e        0x2 ./HAL/HLM35/LM35.o
-                0x00001b1e                LM35_voidInit
+                0x00001b2c        0x2 ./HAL/HLM35/LM35.o
+                0x00001b2c                LM35_voidInit
  .text.LM35_u8GetTemperature
-                0x00001b20       0x3e ./HAL/HLM35/LM35.o
-                0x00001b20                LM35_u8GetTemperature
+                0x00001b2e       0x3e ./HAL/HLM35/LM35.o
+                0x00001b2e                LM35_u8GetTemperature
  .text.HLED_voidTog
-                0x00001b5e        0x6 ./HAL/HLED/LED.o
-                0x00001b5e                HLED_voidTog
+                0x00001b6c        0x6 ./HAL/HLED/LED.o
+                0x00001b6c                HLED_voidTog
  .text.HLED_voidTurnOff
-                0x00001b64        0x8 ./HAL/HLED/LED.o
-                0x00001b64                HLED_voidTurnOff
+                0x00001b72        0x8 ./HAL/HLED/LED.o
+                0x00001b72                HLED_voidTurnOff
  .text.HLED_voidTurnOn
-                0x00001b6c        0x8 ./HAL/HLED/LED.o
-                0x00001b6c                HLED_voidTurnOn
+                0x00001b7a        0x8 ./HAL/HLED/LED.o
+                0x00001b7a                HLED_voidTurnOn
  .text.HLED_voidInit
-                0x00001b74        0x8 ./HAL/HLED/LED.o
-                0x00001b74                HLED_voidInit
- .text.main     0x00001b7c       0x46 ./APP/main.o
-                0x00001b7c                main
- .text.libgcc   0x00001bc2       0x3e d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
-                0x00001bc2                __mulsi3
- .text.libgcc   0x00001c00       0x44 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
-                0x00001c00                __udivmodsi4
- .text.libgcc   0x00001c44        0x0 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x00001c44        0x0 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc   0x00001c44       0x38 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
-                0x00001c44                __prologue_saves__
- .text.libgcc   0x00001c7c       0x36 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
-                0x00001c7c                __epilogue_restores__
- .text.libgcc   0x00001cb2        0x0 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
-                0x00001cb2                . = ALIGN (0x2)
+                0x00001b82        0x8 ./HAL/HLED/LED.o
+                0x00001b82                HLED_voidInit
+ .text.main     0x00001b8a       0xa0 ./APP/main.o
+                0x00001b8a                main
+ .text.libgcc   0x00001c2a       0x3e d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+                0x00001c2a                __mulsi3
+ .text.libgcc   0x00001c68       0x44 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x00001c68                __udivmodsi4
+ .text.libgcc   0x00001cac        0x0 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00001cac        0x0 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00001cac       0x38 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                0x00001cac                __prologue_saves__
+ .text.libgcc   0x00001ce4       0x36 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x00001ce4                __epilogue_restores__
+ .text.libgcc   0x00001d1a        0x0 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                0x00001d1a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001cb2        0x0 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00001cb2                exit
-                0x00001cb2                _exit
+ .fini9         0x00001d1a        0x0 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x00001d1a                exit
+                0x00001d1a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -454,11 +462,11 @@ LOAD d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001cb2        0x4 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x00001d1a        0x4 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00001cb6                _etext = .
+                0x00001d1e                _etext = .
 
-.data           0x00800060      0x108 load address 0x00001cb6
+.data           0x00800060      0x108 load address 0x00001d1e
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
@@ -468,6 +476,7 @@ LOAD d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/
  .data          0x00800060        0x0 ./MCAL/MDIO/DIO.o
  .data          0x00800060        0x0 ./MCAL/MADC/ADC.o
  .data          0x00800060        0x0 ./MCAL/EEPROM/EEPROM.o
+ .data          0x00800060        0x0 ./HAL/MPOT/POT.o
  .data          0x00800060        0x0 ./HAL/HLM35/LM35.o
  .data          0x00800060        0x0 ./HAL/HLED/LED.o
  .data          0x00800060        0x0 ./APP/main.o
@@ -515,6 +524,7 @@ LOAD d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/
  .bss           0x00800168        0x0 ./MCAL/MDIO/DIO.o
  .bss           0x00800168        0x0 ./MCAL/MADC/ADC.o
  .bss           0x00800168        0x0 ./MCAL/EEPROM/EEPROM.o
+ .bss           0x00800168        0x0 ./HAL/MPOT/POT.o
  .bss           0x00800168        0x0 ./HAL/HLM35/LM35.o
  .bss           0x00800168        0x0 ./HAL/HLED/LED.o
  .bss           0x00800168        0x0 ./APP/main.o
@@ -564,8 +574,8 @@ LOAD d:/disktop/embedded system/sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/
  COMMON         0x0080018a        0x2 ./MCAL/MADC/ADC.o
                 0x0080018a                ADC_ptr
                 0x0080018c                PROVIDE (__bss_end, .)
-                0x00001cb6                __data_load_start = LOADADDR (.data)
-                0x00001dbe                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00001d1e                __data_load_start = LOADADDR (.data)
+                0x00001e26                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080018c        0x0
                 0x0080018c                PROVIDE (__noinit_start, .)
