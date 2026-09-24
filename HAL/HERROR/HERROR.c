@@ -38,9 +38,10 @@ void HERROR_voidCheckErrorRequestInit(u8* a_u8PassKey, u8 a_u8PassLength, u32 a_
 void HERROR_voidCheckErrorRequest(void){
     static u8 SL_u8InputPosition = 0;
     u8 L_u8CurrentChar = MUART_u8Rx();
+
     if(L_u8CurrentChar == INCOMPLETE_RECIEVE)
         return;
-
+    // MUART_voidTx(L_u8CurrentChar);
     if(L_u8CurrentChar == GP_u8CorrectPassword[SL_u8InputPosition]){
         SL_u8InputPosition++;
         // MUART_voidTx('w');
@@ -60,9 +61,9 @@ void HERROR_u32PrintErrors(void){
     u8 L_u8LowCurrent = EEPROM_u8Read(EEPROM_ADDR_CURRENT_LOW);
     u8 L_u8HighTemp = EEPROM_u8Read(EEPROM_ADDR_TEMP_ERROR);
     if(L_u8HighCurrent == ERROR_CODE_HIGH_CURRENT)
-        MUART_voidTxStr("Error code 0x51: High Current\n");
+        while(!MUART_voidTxStr("Error code 0x51: High Current\r\n"));
     if(L_u8LowCurrent == ERROR_CODE_LOW_CURRENT)
-        MUART_voidTxStr("Error code 0x52: Low Current\n");
+        while(!MUART_voidTxStr("Error code 0x52: Low Current\r\n"));
     if(L_u8HighTemp == ERROR_CODE_HIGH_TEMP)
-        MUART_voidTxStr("Error code 0x50: High Temperature\n");
+        while(!MUART_voidTxStr("Error code 0x50: High Temperature\r\n"));
 }

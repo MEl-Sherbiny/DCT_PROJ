@@ -14,7 +14,7 @@
 #define INCOMPLETE_RECIEVE 0
 void MUART_voidInit(u32 a_u32BaudRate, u8 a_u8charSize);
 void MUART_voidTx(u8 a_u8Data);
-void MUART_voidTxStr(u8* a_u8String);
+u8 MUART_voidTxStr(u8* a_u8String);
 u8 MUART_u8Rx(void);
 
 
