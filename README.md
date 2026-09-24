@@ -1,8 +1,5 @@
 
 
-htt
-
-
 DTC_PROJECT 
 
 <img width="1038" height="560" alt="image" src="https://github.com/user-attachments/assets/61fd17e1-a354-49e9-826f-d9737d2cb37b" />
@@ -17,4 +14,4 @@ https://github.com/user-attachments/assets/fe77bb6e-3acb-4b51-af7a-63d3da235afe
 =================================================================================
 =================================================================================
 MEMORY WRITING VALUES AND TERMINAL 
-ps://github.com/user-attachments/assets/e09a5339-fba6-4fc8-862a-94cde9305bad
+https://github.com/user-attachments/assets/e09a5339-fba6-4fc8-862a-94cde9305bad
