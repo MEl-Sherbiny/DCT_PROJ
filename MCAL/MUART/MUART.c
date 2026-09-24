@@ -43,23 +43,25 @@ void MUART_voidTx(u8 a_u8Data){
 
 void MUART_voidSendChar(void){
     static u8 SL_u8CurrentPos = 0;
-    UDR = GP_u8CurrentString[SL_u8CurrentPos++];
-    if(GP_u8CurrentString[SL_u8CurrentPos] == '\0'){
-        CLR_BIT(UCSRB, 6);
-        CLR_BIT(UCSRA, 6);
-        G_u8Writing = 0;
-        SL_u8CurrentPos = 0;
-    }
-}
 
+    if (GP_u8CurrentString[SL_u8CurrentPos] == '\0'){
+
+        CLR_BIT(UCSRB, 6);
+        SL_u8CurrentPos = 0;
+        G_u8Writing = 0;
+        return;
+    }
+
+    UDR = GP_u8CurrentString[SL_u8CurrentPos++];
+}
 u8 MUART_voidTxStr(u8* a_u8String){
     if (G_u8Writing)
         return 0;
     G_u8Writing = 1;
+    GP_u8CurrentString = a_u8String;
     SET_BIT(SREG, 7);
     SET_BIT(UCSRB, 6);
-    GP_u8CurrentString = a_u8String;
-    MUART_voidSendChar();
+    UDR = GP_u8CurrentString[0];      /* ابعت أول حرف يدويًا بس (يشغل أول Interrupt) */
     return 1;
 }
 
