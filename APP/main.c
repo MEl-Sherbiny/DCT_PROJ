@@ -7,22 +7,19 @@
 
 #include "../LIB/BitMath.h"
 #include "../LIB/STD_type.h"
-#include "../MCAL/MDIO/DIO.h"
 #include "../HAL/HLED/LED.h"
 #include "../HAL/HLM35/LM35.h"
 #include "../HAL/MPOT/POT.h"
+#include "../HAL/HERROR/HERROR.h"
 #include "../MCAL/MEXTI/EXTI.h"
 #include "../MCAL/EEPROM/EEPROM.h"
+#include "../MCAL/MUART/MUART.h"
+#include "../MCAL/MDIO/DIO.h"
+#include "../MCAL/MADC/ADC.h"
 
-/* ------ EEPROM Addresses ------ */
-#define EEPROM_ADDR_TEMP_ERROR       0x000
-#define EEPROM_ADDR_CURRENT_HIGH     0x001
-#define EEPROM_ADDR_CURRENT_LOW      0x002
-
-/* ------ Error Codes ------ */
-#define ERROR_CODE_HIGH_TEMP         0x50
-#define ERROR_CODE_HIGH_CURRENT      0x51
-#define ERROR_CODE_LOW_CURRENT       0x52
+#define HIGH_TEMP 40
+#define LOW_CURRENT 100 //about 0.5v
+#define HIGH_CURRENT 900 //about 4.5v
 
 int main(void)
 {
@@ -37,13 +34,9 @@ int main(void)
 	    /* 2. Initialize LM35 */
 	    LM35_voidInit();
 	    POT_voidInit();
-
+		HERROR_voidCheckErrorRequestInit("123", 3, 9600);
 	    u8 L_u8CurrentTemp = 0 ;
-	    u8 L_TEMP_THRESHOLD = 40 ;
-
 	    u16 L_u16CurrentCurr = 1;
-        u16 L_u16LowCurrent = 0 ;
-        u16 L_u16HighCurrent = 1023;
 
 
 	    while (1)
@@ -53,42 +46,33 @@ int main(void)
 		    /* 4. Read current temperature from LM35 */
 		    	        L_u8CurrentTemp = LM35_u8GetTemperature();
 		    	        L_u16CurrentCurr = POT_u16GetCurrent();
-		    	        if (L_u16CurrentCurr >= L_u16HighCurrent)
+		    	        if (L_u16CurrentCurr >= HIGH_CURRENT)
 		    	        {
 		    	        	L_u8ErrorExists = 1;
-		    	        	if (G_u8HighCurrErrorLogged == 0)
-		    	        	        {
-		    	        	            EEPROM_voidWrite(EEPROM_ADDR_CURRENT_HIGH, ERROR_CODE_HIGH_CURRENT);
-		    	        	            G_u8HighCurrErrorLogged = 1;
-		    	        	        }
+		    	        	HERROR_voidSetError(ERROR_CODE_HIGH_CURRENT);
 		    	        }
-		    	        if (L_u16CurrentCurr == L_u16LowCurrent)
+		    	        if (L_u16CurrentCurr <= LOW_CURRENT)
 		    	         {
 		    	        	L_u8ErrorExists = 1;
-		    	         	if (G_u8LowCurrErrorLogged == 0)
-		    	         	        {
-		    	         	            EEPROM_voidWrite(EEPROM_ADDR_CURRENT_LOW, ERROR_CODE_LOW_CURRENT);
-		    	         	           G_u8LowCurrErrorLogged = 1;
-		    	         	        }
+		    	         	HERROR_voidSetError(ERROR_CODE_LOW_CURRENT);
 		    	         }
 		    	        /* 5. Check Threshold for Temperature (DTC 0x52) */
-		    	        if (L_u8CurrentTemp > L_TEMP_THRESHOLD)
+		    	        if (L_u8CurrentTemp > HIGH_TEMP)
 		    	        {
 		    	        	L_u8ErrorExists = 1;
-		    	        	if (G_u8TempErrorLogged == 0)
-		    	        	        {
-		    	        	            EEPROM_voidWrite(EEPROM_ADDR_TEMP_ERROR, ERROR_CODE_HIGH_TEMP);
-		    	        	            G_u8TempErrorLogged = 1;
-		    	        	        }
+		    	        	HERROR_voidSetError(ERROR_CODE_HIGH_TEMP);
 		    	        }
 
 		    	        if (L_u8ErrorExists == 1 )
 		    	        {
-		    	        	HLED_voidTurnOn(DIO_PORTD ,DIO_PIN7);		    	        }
-		    	        if( L_u8ErrorExists != 1 )
+		    	        	HLED_voidTurnOn(DIO_PORTD ,DIO_PIN7);
+						}
+		    	        else
 		    	        {
-    		    	        	HLED_voidTurnOff(DIO_PORTD ,DIO_PIN7);
+    		    	        HLED_voidTurnOff(DIO_PORTD ,DIO_PIN7);
 		    	        }
+
+						HERROR_voidCheckErrorRequest();
 
 	    }
 }
